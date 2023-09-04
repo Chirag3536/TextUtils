@@ -10,19 +10,20 @@ export default function TextForm(props) {
     const handleUpClick = ()=>{
             let newText = text.toUpperCase();
             setText(newText);
-            props.showAlert("Text changed to UpperCase", "success")
+            // props.showAlert("Text changed to UpperCase", "success")
         
     }
 
     const handleLowClick = ()=>{
             setText(text.toLowerCase());
-            props.showAlert("Text changed to LowerCase", "success")
-        
-    }
+            // props.showAlert("Text changed to LowerCase", "success")
+            
+          }
+          
+          const handleClearClick = ()=>{
+            setText('');
+            props.showAlert("Text deleted", "success")
 
-    const handleClearClick = ()=>{
-            let rs = window.confirm("Do you want to clear")
-            if(rs) setText('')
     }
 
     const handleCopyToClipboard = ()=>{
@@ -32,7 +33,37 @@ export default function TextForm(props) {
 
     const handleRemoveExtraSpace = ()=>{
         setText(text.split(' ').filter(word => word).join(' '))
-        props.showAlert("Removed extra space ", "success")
+        // props.showAlert("Removed extra space ", "success")
+    }
+
+    const handleRemoveExtraLines =()=>{
+        console.log(text)
+        setText(text.replace(/^(?=\n)$|^\s*|\s*$|\n\n+/gm, ""))
+        // props.showAlert("Removed extra lines", "success")
+    }
+
+    const handleCapitalizeSentences = ()=>{
+      const sentenceRegex = /(\.\s+)/g;
+
+      // Split the input string into an array of sentences using the regex
+      const sentences = text.split(sentenceRegex);
+    
+      // Iterate through each sentence and capitalize the first letter
+      const formattedSentences = sentences.map((sentence, index) => {
+        // Capitalize the first letter if it's not empty
+        if (index % 2 === 0) {
+          sentence = sentence.charAt(0).toUpperCase() + sentence.slice(1).toLowerCase();
+        }
+        return sentence;
+      });
+    
+      // Join the formatted sentences back together
+      const resultString = formattedSentences.join('');
+  
+      
+      setText(resultString);
+      // props.showAlert("Capitalized sentences ", "success")
+
     }
 
     const [text, setText] = useState(""); 
@@ -54,6 +85,8 @@ export default function TextForm(props) {
         <button disabled = {text.length === 0} className=" btn btn-primary my-3 mx-1" onClick={handleClearClick}>ClearText</button>
         <button disabled = {text.length === 0} className=" btn btn-primary my-3 mx-1" onClick={handleCopyToClipboard}>CopyToClipboard</button>
         <button disabled = {text.length === 0} className=" btn btn-primary my-3 mx-1" onClick={handleRemoveExtraSpace}>RemoveExtraSpace</button>
+        <button disabled = {text.length === 0} className=" btn btn-primary my-3 mx-1" onClick={handleRemoveExtraLines}>RemoveExtraLines</button>
+        <button disabled = {text.length === 0} className=" btn btn-primary my-3 mx-1" onClick={handleCapitalizeSentences}>CapitalizeSentences</button>
       </div>
       <div className="container summary my-4" style={{color : props.mode === 'light' ? 'black':'white', backgroundColor: props.mode==='light'?'white':'#3d4155'}}>
         <h2>Your Summary</h2>
