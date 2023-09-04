@@ -1,4 +1,3 @@
-// import logo from './logo.svg';
 import "./App.css";
 import Navbar from "./Components/Navbar";
 import TextForm from "./Components/TextForm";
@@ -6,6 +5,7 @@ import TextForm from "./Components/TextForm";
 import Alert from "./Components/Alert";
 import React, { useState } from "react";
 // import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router} from "react-router-dom";
 
 function App() {
   const [mode, setMode] = useState("light");
@@ -36,18 +36,19 @@ function App() {
 
   return (
     <>
-      {/* <Router>
+      <Router>
           <Navbar title = "TextEdits" about = "About Us" mode = {mode} toggleMode = {toggleMode}/>
           <Alert alert = {alert}/>
-          <Routes>
+          <TextForm mode = {mode} showAlert = {showAlert}/>
+          {/* <Routes>
             <Route exact path="/" element={<TextForm mode = {mode} showAlert = {showAlert} />} />
             <Route exact path="/about" element={<About />} />
-          </Routes>
-      </Router> */}
+          </Routes> */}
+      </Router>
 
-      <Navbar title = "TextEdits" about = "About Us" mode = {mode} toggleMode = {toggleMode}/>
+      {/* <Navbar title = "TextEdits" about = "About Us" mode = {mode} toggleMode = {toggleMode}/>
       <Alert alert = {alert}/>
-      <TextForm mode = {mode} showAlert = {showAlert} />
+      <TextForm mode = {mode} showAlert = {showAlert} /> */}
     </>
   );
 }
