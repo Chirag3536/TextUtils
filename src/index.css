@@ -16,3 +16,6 @@ code {
   height: 400px !important;
 }
 
+.btn:hover{
+  background: black;
+}

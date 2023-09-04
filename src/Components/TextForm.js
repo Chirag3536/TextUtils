@@ -21,24 +21,18 @@ export default function TextForm(props) {
     }
 
     const handleClearClick = ()=>{
-        // if(text.length > 0){
             let rs = window.confirm("Do you want to clear")
             if(rs) setText('')
-        // }
-        // else{
-        //     props.showAlert("Please enter some text", "warning")
-        // }
     }
 
     const handleCopyToClipboard = ()=>{
-        // if(text.length > 0){
             copy(text)
             props.showAlert("Text Copied Successfully!! ", "success")
-        // }
-        // else{
-            // props.showAlert("Please enter some text", "warning")
-        // }
-        // props.showAlert("Copied to clipboard")
+    }
+
+    const handleRemoveExtraSpace = ()=>{
+        setText(text.split(' ').filter(word => word).join(' '))
+        props.showAlert("Removed extra space ", "success")
     }
 
     const [text, setText] = useState(""); 
@@ -59,6 +53,7 @@ export default function TextForm(props) {
         <button disabled = {text.length === 0} className=" btn btn-primary my-3 mx-1" onClick={handleLowClick}>ToLowerCase</button>
         <button disabled = {text.length === 0} className=" btn btn-primary my-3 mx-1" onClick={handleClearClick}>ClearText</button>
         <button disabled = {text.length === 0} className=" btn btn-primary my-3 mx-1" onClick={handleCopyToClipboard}>CopyToClipboard</button>
+        <button disabled = {text.length === 0} className=" btn btn-primary my-3 mx-1" onClick={handleRemoveExtraSpace}>RemoveExtraSpace</button>
       </div>
       <div className="container summary my-4" style={{color : props.mode === 'light' ? 'black':'white', backgroundColor: props.mode==='light'?'white':'#3d4155'}}>
         <h2>Your Summary</h2>
